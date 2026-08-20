@@ -155,87 +155,9 @@
             animation: pulse 1.2s infinite alternate;
         }
 
-        .gallery-section {
-            margin-top: 28px;
-            padding-top: 12px;
-        }
-
-        .gallery-header {
-            margin-bottom: 20px;
-            font-size: clamp(1.4rem, 3vw, 2.3rem);
-            color: #fff;
-            text-shadow: 0 8px 24px rgba(0,0,0,0.22);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(180px, 1fr));
-            gap: 18px;
-        }
-
-        .photo-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 22px;
-            min-height: 230px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
-            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .photo-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 26px 52px rgba(0,0,0,0.22);
-        }
-
-        .photo-card img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
-
-        .photo-card.photo-four img {
-            transform: scale(1.12);
-        }
-
-        .photo-card.placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-            color: #ffe3e3;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .photo-card.placeholder::before {
-            content: '❤';
-            font-size: 3rem;
-            opacity: 0.8;
-        }
-
-        .love-note {
-            margin-top: 28px;
-            font-size: clamp(1rem, 1.8vw, 1.25rem);
-            line-height: 1.8;
-            color: #ffe4e4;
-            padding: 18px 20px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.14);
-        }
-
         @keyframes pulse {
             from { transform: scale(1); }
             to { transform: scale(1.12); }
-        }
-
-        @media (max-width: 760px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, minmax(160px, 1fr));
-            }
         }
 
         @media (max-width: 600px) {
@@ -251,9 +173,6 @@
                 letter-spacing: 0.18em;
             }
 
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -278,35 +197,6 @@
 
         <div class="mini-hearts" aria-label="corações">❤ ❤ ❤ ❤ ❤</div>
 
-        <section class="gallery-section" aria-label="galeria de fotos">
-            <h2 class="gallery-header">Nossos momentos ❤</h2>
-
-            <div class="gallery-grid">
-                <div class="photo-card">
-                    <img alt="Foto 1 do casal" />
-                </div>
-                <div class="photo-card">
-                    <img alt="Foto 2 do casal" />
-                </div>
-                <div class="photo-card">
-                    <img alt="Foto 3 do casal" />
-                </div>
-                <div class="photo-card photo-four">
-                    <img alt="Foto 4 do casal" />
-                </div>
-                <div class="photo-card">
-                    <img alt="Foto 5 do casal" />
-                </div>
-                <div class="photo-card">
-                    <img alt="Foto 6 do casal" />
-                </div>
-            </div>
-        </section>
-
-        <div class="love-note">
-            Você é a minha calma, a minha alegria e a minha maior motivação para ser melhor todos os dias.
-            Eu te amo com tudo que eu sou, Evelyn. ❤
-        </div>
     </main>
 
     <script>
@@ -350,36 +240,6 @@
         updateCounter();
         setInterval(updateCounter, 1000);
 
-        const photoCandidates = [
-            ['./fotos/foto1.jpg', './fotos/foto1.jpeg', './fotos/foto1.jpg.jpeg'],
-            ['./fotos/foto2.jpg', './fotos/foto2.jpeg', './fotos/foto2.jpg.jpeg'],
-            ['./fotos/foto3.jpg', './fotos/foto3.jpeg', './fotos/foto3.jpg.jpeg'],
-            ['./fotos/foto4.jpg', './fotos/foto4.jpeg', './fotos/foto4.jpg.jpeg'],
-            ['./fotos/foto5.jpg', './fotos/foto5.jpeg', './fotos/foto5.jpg.jpeg'],
-            ['./fotos/foto6.jpg', './fotos/foto6.jpeg', './fotos/foto6.jpg.jpeg'],
-        ];
-
-        document.querySelectorAll('.photo-card').forEach((card, index) => {
-            const img = card.querySelector('img');
-            const candidates = photoCandidates[index] || [];
-            let current = 0;
-
-            function tryNext() {
-                if (current >= candidates.length) {
-                    card.classList.add('placeholder');
-                    img.style.display = 'none';
-                    return;
-                }
-
-                img.src = candidates[current];
-                img.onerror = () => {
-                    current += 1;
-                    tryNext();
-                };
-            }
-
-            tryNext();
-        });
     </script>
 </body>
 </html>
