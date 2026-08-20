@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>para evelyn</title>
+    <style>
+        :root {
+            --bg1: #5f0000;
+            --bg2: #8b0000;
+            --card: rgba(255, 255, 255, 0.10);
+            --card-border: rgba(255, 255, 255, 0.22);
+            --text: #fff7f7;
+            --soft: #ffd6d6;
+            --highlight: #ffebee;
+            --shadow: rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2), #b00020);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .heart-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -120px;
+            font-size: clamp(18px, 2vw, 32px);
+            color: rgba(255, 255, 255, 0.7);
+            animation: fall linear infinite;
+            opacity: 0.8;
+            text-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            100% {
+                transform: translateY(-120vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            width: min(960px, 100%);
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            box-shadow: 0 30px 80px var(--shadow);
+            backdrop-filter: blur(8px);
+            padding: clamp(24px, 4vw, 58px);
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--soft);
+            margin-bottom: 24px;
+        }
+
+        .title {
+            margin: 0 0 18px;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--highlight);
+            text-shadow: 0 8px 24px rgba(0,0,0,0.22);
+        }
+
+        .title span {
+            display: block;
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .message {
+            max-width: 720px;
+            margin: 0 auto 28px;
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--soft);
+        }
+
+        .timer-box {
+            margin-top: 26px;
+            padding: clamp(18px, 3vw, 30px);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.16);
+            box-shadow: inset 0 0 30px rgba(255,255,255,0.04);
+        }
+
+        .timer-label {
+            margin: 0 0 12px;
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            color: #ffe6e6;
+            letter-spacing: 0.04em;
+        }
+
+        #tempo {
+            font-size: clamp(1.2rem, 2.8vw, 2.2rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 18px rgba(255,255,255,0.35);
+        }
+
+        .date {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #ffd7d7;
+            opacity: 0.95;
+        }
+
+        .mini-hearts {
+            margin-top: 24px;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            letter-spacing: 0.3em;
+            color: #ffe0e0;
+            animation: pulse 1.2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.12); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 20px;
+            }
+
+            .title {
+                letter-spacing: -0.03em;
+            }
+
+            .mini-hearts {
+                letter-spacing: 0.18em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" aria-hidden="true"></div>
+
+    <main class="container">
+        <div class="badge">Para a minha princesa</div>
+
+        <h1 class="title">eu te amo Evelyn<span>❤</span></h1>
+
+        <p class="message">
+            Cada segundo, cada riso e cada momento ao seu lado têm sido os melhores presentes da vida.
+            Você ilumina tudo ao meu redor e torna cada dia mais bonito.
+        </p>
+
+        <div class="timer-box">
+            <p class="timer-label">estamos juntos há...</p>
+            <div id="tempo">carregando...</div>
+            <div class="date">Desde 4 de junho de 2026</div>
+        </div>
+
+        <div class="mini-hearts" aria-label="corações">❤ ❤ ❤ ❤ ❤</div>
+    </main>
+
+    <script>
+        const startDate = new Date(2026, 5, 4, 0, 0, 0);
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+            const years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+            let remaining = totalSeconds - years * 365 * 24 * 60 * 60;
+
+            const months = Math.floor(remaining / (30 * 24 * 60 * 60));
+            remaining -= months * 30 * 24 * 60 * 60;
+
+            const days = Math.floor(remaining / (24 * 60 * 60));
+            remaining -= days * 24 * 60 * 60;
+
+            const hours = Math.floor(remaining / (60 * 60));
+            remaining -= hours * 60 * 60;
+
+            const minutes = Math.floor(remaining / 60);
+            const seconds = remaining % 60;
+
+            const text = `${years} ano${years !== 1 ? 's' : ''}, ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, ${hours} hora${hours !== 1 ? 's' : ''}, ${minutes} minuto${minutes !== 1 ? 's' : ''} e ${seconds} segundo${seconds !== 1 ? 's' : ''}`;
+            document.getElementById('tempo').textContent = text;
+        }
+
+        for (let i = 0; i < 26; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '❤';
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.animationDuration = `${8 + Math.random() * 12}s`;
+            heart.style.fontSize = `${16 + Math.random() * 28}px`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            document.querySelector('.heart-bg').appendChild(heart);
+        }
+
+        updateCounter();
+        setInterval(updateCounter, 1000);
+    </script>
+</body>
+</html>
