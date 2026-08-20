@@ -283,22 +283,22 @@
 
             <div class="gallery-grid">
                 <div class="photo-card">
-                    <img src="./fotos/foto1.jpg" alt="Foto 1 do casal" />
+                    <img alt="Foto 1 do casal" />
                 </div>
                 <div class="photo-card">
-                    <img src="./fotos/foto2.jpg" alt="Foto 2 do casal" />
+                    <img alt="Foto 2 do casal" />
                 </div>
                 <div class="photo-card">
-                    <img src="./fotos/foto3.jpg" alt="Foto 3 do casal" />
+                    <img alt="Foto 3 do casal" />
                 </div>
                 <div class="photo-card photo-four">
-                    <img src="./fotos/foto4.jpg" alt="Foto 4 do casal" />
+                    <img alt="Foto 4 do casal" />
                 </div>
                 <div class="photo-card">
-                    <img src="./fotos/foto5.jpg" alt="Foto 5 do casal" />
+                    <img alt="Foto 5 do casal" />
                 </div>
                 <div class="photo-card">
-                    <img src="./fotos/foto6.jpg" alt="Foto 6 do casal" />
+                    <img alt="Foto 6 do casal" />
                 </div>
             </div>
         </section>
@@ -350,11 +350,35 @@
         updateCounter();
         setInterval(updateCounter, 1000);
 
-        document.querySelectorAll('.photo-card img').forEach((img) => {
-            img.addEventListener('error', () => {
-                img.style.display = 'none';
-                img.parentElement.classList.add('placeholder');
-            });
+        const photoCandidates = [
+            ['./fotos/foto1.jpg', './fotos/foto1.jpeg', './fotos/foto1.jpg.jpeg'],
+            ['./fotos/foto2.jpg', './fotos/foto2.jpeg', './fotos/foto2.jpg.jpeg'],
+            ['./fotos/foto3.jpg', './fotos/foto3.jpeg', './fotos/foto3.jpg.jpeg'],
+            ['./fotos/foto4.jpg', './fotos/foto4.jpeg', './fotos/foto4.jpg.jpeg'],
+            ['./fotos/foto5.jpg', './fotos/foto5.jpeg', './fotos/foto5.jpg.jpeg'],
+            ['./fotos/foto6.jpg', './fotos/foto6.jpeg', './fotos/foto6.jpg.jpeg'],
+        ];
+
+        document.querySelectorAll('.photo-card').forEach((card, index) => {
+            const img = card.querySelector('img');
+            const candidates = photoCandidates[index] || [];
+            let current = 0;
+
+            function tryNext() {
+                if (current >= candidates.length) {
+                    card.classList.add('placeholder');
+                    img.style.display = 'none';
+                    return;
+                }
+
+                img.src = candidates[current];
+                img.onerror = () => {
+                    current += 1;
+                    tryNext();
+                };
+            }
+
+            tryNext();
         });
     </script>
 </body>
